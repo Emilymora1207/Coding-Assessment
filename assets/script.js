@@ -11,12 +11,19 @@ var quizEl = document.querySelector('.quiz');
 var afterQuizEl = document.querySelector('.after-quiz');
 var highScoreEl = document.querySelector('.high-score');
 var initialsEl = document.querySelector('.initials');
-var storedScores = document.querySelector('.stored-scores');
+var storedScoresEl = document.querySelector('.stored-scores');
+var submitInitialsEl = document.querySelector('.submit-initials');
+var afterSubmitEl = document.querySelector('.after-submit');
+var restartQuizEl = document.querySelector('.restart-quiz');
+
+var listHighScores = []
 var currentHighScore;
-var counter;
+var timer;
 var score=0;
 var i=0;
+var j=0;
 var countdown = 60;
+
 var quiz =[ {
     question:"What type of file hold the styling for a Webpage?",
     A: "HTML",
@@ -45,7 +52,7 @@ var quiz =[ {
 
 function startQuiz() {
 startbtn.style.display = "none";
-counter = setInterval(function () {timerEl.innerHTML = "Time:" + countdown--}, 1000);
+timer = setInterval(function () {timerEl.innerHTML = "Time:" + countdown--}, 1000);
 addQuestions();
 }
 
@@ -64,7 +71,25 @@ function endGame() {
     highScoreEl.textContent=currentHighScore + "%";
 }
 
+
+//*******************************************************
 function displayHighScores() {
+listHighScores= JSON.parse(localStorage.getItem("high scores"));
+for(k=0; k<listHighScores.length; k++){
+var liEls = document.createElement("li")
+storedScoresEl.children[k].textContent= ("Score: " + listHighScores[k].scores + "Initials: " + listHighScores[k].initials);
+storedScoresEl.append(liEls);  
+}
+
+}
+
+function scoresIntoScorage() {
+    listHighScores[j] = {
+        scores: currentHighScore,
+        initials: initialsEl.value
+    }
+localStorage.setItem("high scores", JSON.stringify(listHighScores));
+j++;
 }
 
 
@@ -78,12 +103,30 @@ answers.addEventListener('click', function(event){
     }
     i++;
     if (i<quiz.length){
-        addQuestions()
+        addQuestions();
     } else {
         timerEl.textContent= "Time:";
         endGame();
         // alert("Game Over");
         // clearInterval(counter);
     }
-})
+});
+
 startbtn.addEventListener('click', startQuiz);
+
+submitInitialsEl.addEventListener('click', function(){
+    if (initialsEl.value===""){
+        return
+    }else{
+    scoresIntoScorage();
+    afterQuizEl.style.display="none";
+    afterSubmitEl.style.display="initial";
+    }
+});
+
+restartQuizEl.addEventListener('click', function(){
+    afterSubmitEl.style.display="none";
+    i=0;
+    quizEl.style.display="initial";
+    addQuestions();
+})

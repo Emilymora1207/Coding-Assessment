@@ -39,12 +39,13 @@ main button {
     padding: 10px;
 }
 
-  overflow-wrap: break-word
+  /* overflow-wrap: break-word */
 
 hr {
     width: 600px;
 }
 
-.after-quiz {
+.after-quiz, .after-submit {
     display: none;
 }
+
