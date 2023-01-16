@@ -22,6 +22,7 @@ var timer;
 var score=0;
 var i=0;
 var j=0;
+var k=0;
 var countdown = 60;
 
 var quiz =[ {
@@ -47,12 +48,59 @@ var quiz =[ {
     C:'HTML',
     D: 'JavaScript',
     answer: "JavaScript"
+},
+{
+    question: 'What is a special variable, which can hold more than one value?',
+    A: 'Function',
+    B: 'Object',
+    C: 'Array',
+    D: 'Value',
+    answer: 'Array'
+},
+{
+    question: 'What is a decision-making statement that guides a program to make decisions based on specified criteria?',
+    A: 'For Loop',
+    B: 'If Statement',
+    C: 'Function',
+    D: 'Variable',
+    answer: 'If Statement'
+},
+{
+    question: 'What kind of operator is "="?',
+    A: 'Arthmetic',
+    B: 'Assignment',
+    C: 'Comparison',
+    D: 'Logical',
+    answer: 'Assignment'
+},
+{
+    question: 'What kind of operator is "==="?',
+    A: 'Arthmetic',
+    B: 'Assignment',
+    C: 'Comparison',
+    D: 'Logical',
+    answer: 'Comparison'
+},
+{
+    question: 'What is an example of a string?',
+    A: '0',
+    B: 'true',
+    C: 'i=0',
+    D: '"Hello World"',
+    answer: '"Hello World"'
 }
 ]
 
+startbtn.addEventListener('click', startQuiz);
+
+
 function startQuiz() {
 startbtn.style.display = "none";
-timer = setInterval(function () {timerEl.innerHTML = "Time:" + countdown--}, 1000);
+timer = setInterval(function () {timerEl.innerHTML = "Time:" + countdown--;
+    if(countdown < 0){
+        clearInterval(timer);
+        endGame();
+    }}, 1000);
 addQuestions();
 }
 
@@ -64,34 +112,6 @@ function addQuestions(){
     choiceD.textContent = quiz[i].D;
 }
 
-function endGame() {
-    quizEl.style.display="none";
-    afterQuizEl.style.display="initial";
-    currentHighScore = Math.round((score / quiz.length) * 100);
-    highScoreEl.textContent=currentHighScore + "%";
-}
-
-
-//*******************************************************
-function displayHighScores() {
-listHighScores= JSON.parse(localStorage.getItem("high scores"));
-for(k=0; k<listHighScores.length; k++){
-var liEls = document.createElement("li")
-storedScoresEl.children[k].textContent= ("Score: " + listHighScores[k].scores + "Initials: " + listHighScores[k].initials);
-storedScoresEl.append(liEls);  
-}
-
-}
-
-function scoresIntoScorage() {
-    listHighScores[j] = {
-        scores: currentHighScore,
-        initials: initialsEl.value
-    }
-localStorage.setItem("high scores", JSON.stringify(listHighScores));
-j++;
-}
-
 
 answers.addEventListener('click', function(event){
     console.log(event);
@@ -99,34 +119,65 @@ answers.addEventListener('click', function(event){
         answerToF.textContent='Right';
         score++;
     }else {
-        answerToF.textContent= 'Wrong'
+        answerToF.textContent= 'Wrong';
+        countdown= countdown-3;
     }
     i++;
     if (i<quiz.length){
         addQuestions();
     } else {
-        timerEl.textContent= "Time:";
+        // timerEl.textContent= "Time:";
         endGame();
-        // alert("Game Over");
-        // clearInterval(counter);
     }
 });
 
-startbtn.addEventListener('click', startQuiz);
+
+function endGame() {
+    clearInterval(timer);
+    quizEl.style.display="none";
+    afterQuizEl.style.display="initial";
+    currentHighScore = Math.round((score / quiz.length) * 100);
+    highScoreEl.textContent=currentHighScore + "%";
+}
 
 submitInitialsEl.addEventListener('click', function(){
     if (initialsEl.value===""){
         return
     }else{
-    scoresIntoScorage();
+
     afterQuizEl.style.display="none";
     afterSubmitEl.style.display="initial";
+    scoresIntoStorage();
+    displayHighScores();
     }
 });
 
+function scoresIntoStorage() {
+    listHighScores[j] = [{
+        scores: currentHighScore,
+        initials: initialsEl.value
+    }];
+localStorage.setItem("high scores", JSON.stringify(listHighScores));
+j++;
+}
+
+
+//*******************************************************
+function displayHighScores() {
+    listHighScores= JSON.parse(localStorage.getItem("high scores"));
+    k=listHighScores.length-1;
+    var liEls = document.createElement("li")
+    storedScoresEl.append(liEls);
+    storedScoresEl.lastElementChild.innerHTML= "Score: " + listHighScores[k].scores + "Initials: " + listHighScores[k].initials;   
+}
+
+
+
 restartQuizEl.addEventListener('click', function(){
-    afterSubmitEl.style.display="none";
     i=0;
+    afterSubmitEl.style.display="none";
     quizEl.style.display="initial";
-    addQuestions();
+    startQuiz();
+    countdown=60;
+    answerToF.textContent="";
 })
