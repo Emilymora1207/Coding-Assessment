@@ -11,10 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- navbar for highscore and timer -->
     <nav class="navbar">
         <a class="high-scores-link">View Highscores</a>
         <span class="timer">Time: </span>
     </nav>
+    <!-- first main, displayed during the quiz -->
     <main class="quiz">
         <h1 class="Questions"></h1>
         <section class="answers">
@@ -23,10 +25,10 @@
         <button class="answer-c">C. </button>
         <button class="answer-d">D. </button>
     </section>
-        <!-- <hr class="hidden"/> -->
         <button class="start">Start</button>
         <h2 class="T-or-F hidden"></h2>
     </main>
+    <!-- second main, for after the quiz, used to submit initials -->
     <main class="after-quiz">
         <h2>Here is your high-score</h2>
         <span class="high-score"></span>
@@ -34,13 +36,7 @@
         <input class="initials" type="text" placeholder="Your initials here">
         <button class="submit-initials">Submit</button>
     </main>
-    <!-- <main class="after-submit">
-        <button class="view-high-scores">
-            <a>View HighScores</a>
-        </button>
-        <button class="restart-quiz">Take quiz again
-        </button>
-    </main> -->
+    <!-- third main, used to display the high scores with an option to restart the quiz -->
     <main class="high-scores-page">
         <h1>Your High Scores</h1>
         <ul class="stored-scores">
@@ -48,7 +44,7 @@
         <button class="restart-quiz">Restart quiz
         </button>
     </main>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 <script src="./assets/script.js"></script>
 </body>
 </html>

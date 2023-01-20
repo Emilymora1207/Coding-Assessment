@@ -36,6 +36,7 @@ a {
     border-radius: 5px;
     flex-direction: column;
     width:700px;
+    /* this is making the answers centered at the start */
     align-items: center;
 }
 
