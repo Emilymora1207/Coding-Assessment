@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Assessment</title>
     <link rel="stylesheet" href="./assets/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
-        <a href="./assets/scores.html">View Highscores</a>
+        <a class="high-scores-link">View Highscores</a>
         <span class="timer">Time: </span>
     </nav>
     <main class="quiz">
@@ -31,10 +34,17 @@
         <input class="initials" type="text" placeholder="Your initials here">
         <button class="submit-initials">Submit</button>
     </main>
-    <main class="after-submit">
-        <button>
-            <a href=./assets/scores.html>View HighScores</a>
+    <!-- <main class="after-submit">
+        <button class="view-high-scores">
+            <a>View HighScores</a>
         </button>
+        <button class="restart-quiz">Take quiz again
+        </button>
+    </main> -->
+    <main class="high-scores-page">
+        <h1>Your High Scores</h1>
+        <ul class="stored-scores">
+        </ul>
         <button class="restart-quiz">Take quiz again
         </button>
     </main>

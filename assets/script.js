@@ -15,6 +15,8 @@ var storedScoresEl = document.querySelector('.stored-scores');
 var submitInitialsEl = document.querySelector('.submit-initials');
 var afterSubmitEl = document.querySelector('.after-submit');
 var restartQuizEl = document.querySelector('.restart-quiz');
+var highScoresPage = document.querySelector('.high-scores-page');
+var highScoresLink = document.querySelector('.high-scores-link')
 
 var listHighScores = []
 var currentHighScore;
@@ -116,10 +118,12 @@ function addQuestions(){
 answers.addEventListener('click', function(event){
     console.log(event);
     if (event.target.innerHTML===quiz[i].answer){
-        answerToF.textContent='Right';
+        answerToF.textContent='Correct';
+        answerToF.style.color="rgba(0, 0, 0, 0.425)"
         score++;
     }else {
-        answerToF.textContent= 'Wrong';
+        answerToF.textContent= 'Incorrect';
+        answerToF.style.color= "rgba(255, 0, 0, 0.425)";
         countdown= countdown-3;
     }
     i++;
@@ -134,50 +138,61 @@ answers.addEventListener('click', function(event){
 
 function endGame() {
     clearInterval(timer);
+    
     quizEl.style.display="none";
     afterQuizEl.style.display="initial";
     currentHighScore = Math.round((score / quiz.length) * 100);
     highScoreEl.textContent=currentHighScore + "%";
 }
 
+
+
+// ************************************************************************
 submitInitialsEl.addEventListener('click', function(){
     if (initialsEl.value===""){
         return
     }else{
 
     afterQuizEl.style.display="none";
-    afterSubmitEl.style.display="initial";
+    highScoresPage.style.display="initial";
     scoresIntoStorage();
     displayHighScores();
+    score=0;
     }
 });
 
 function scoresIntoStorage() {
-    listHighScores[j] = [{
+    listHighScores[j] = {
         scores: currentHighScore,
         initials: initialsEl.value
-    }];
+    };
 localStorage.setItem("high scores", JSON.stringify(listHighScores));
 j++;
 }
 
-
-//*******************************************************
 function displayHighScores() {
-    listHighScores= JSON.parse(localStorage.getItem("high scores"));
-    k=listHighScores.length-1;
+    var getHighScores= JSON.parse(localStorage.getItem("high scores"));
+    k=getHighScores.length-1;
     var liEls = document.createElement("li")
+    liEls.innerHTML= "Score: " + getHighScores[k].scores + " Initials: " + getHighScores[k].initials;   
     storedScoresEl.append(liEls);
-    storedScoresEl.lastElementChild.innerHTML= "Score: " + listHighScores[k].scores + "Initials: " + listHighScores[k].initials;   
+    console.log(getHighScores);
 }
-
+// **********************************************************************
 
 
 restartQuizEl.addEventListener('click', function(){
     i=0;
-    afterSubmitEl.style.display="none";
+    highScoresPage.style.display="none";
     quizEl.style.display="initial";
     startQuiz();
     countdown=60;
     answerToF.textContent="";
+})
+
+//// add a link to view the highscores
+highScoresLink.addEventListener('click', function(){
+    quizEl.style.display='none';
+    afterQuizEl.style.display='none'
+    highScoresPage.style.display='initial'
 })

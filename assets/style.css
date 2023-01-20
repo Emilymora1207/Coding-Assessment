@@ -1,3 +1,14 @@
+:root {
+    --background: rgba(203, 238, 233, 0.788);
+    --shadow: rgb(71, 73, 73);
+    --buttonColor1: rgb(70, 218, 198);
+    --buttonColor2: rgb(148, 250, 190);
+}
+
+* {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
 
 body {
     display: flex;
@@ -17,11 +28,12 @@ a {
 }
 
 .quiz, .after-quiz {
-    justify-content: center;
-    padding: 20px;
-    border: black 1px solid;
-    border-radius: 5px;
     display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: var(--background);
+    border-radius: 5px;
     flex-direction: column;
     width:700px;
     align-items: center;
@@ -29,15 +41,34 @@ a {
 
 h1 {
     font-size: 250%;
+    font-weight: 300;
 }
 
-main button {
+button {
+    border: none;
     box-sizing: border-box;
-    background-color: darkcyan;
+    background-image: linear-gradient(to bottom, var(--buttonColor1), var(--buttonColor2));
     border-radius: 5px;
-    width: 300px;
+    width: 150px;
     padding: 10px;
+    margin: 15px 0;
+    box-shadow: 2px 2px 5px var(--shadow);
 }
+
+li {
+    list-style: none;
+    background-color: var(--background);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px 0;
+    text-align: justify;
+}
+
+/* .view-high-scores, .restart-quiz {
+    width:250px;
+    margin: 15px;
+    padding: 15px;
+} */
 
   /* overflow-wrap: break-word */
 
@@ -45,7 +76,13 @@ hr {
     width: 600px;
 }
 
-.after-quiz, .after-submit {
+.high-scores-page {
+    display: flex;
+    justify-content: center;
+}
+
+
+.after-quiz, .high-scores-page {
     display: none;
 }
 
