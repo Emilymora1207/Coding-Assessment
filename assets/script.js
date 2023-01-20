@@ -198,10 +198,9 @@ function displayHighScores() {
 //function to start the quiz again
 restartQuizEl.addEventListener('click', function(){
     i=0;
-    //i cannot do location.reload because i need to display highscores and it will make the new highscore overwrite the previous one.
-    // location.reload();
     highScoresPage.style.display="none";
     quizEl.style.display="initial";
+    quizEl.style.alignItems='center';  
     j++;
     startQuiz();
     countdown=60;
