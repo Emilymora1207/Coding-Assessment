@@ -64,14 +64,6 @@ li {
     text-align: justify;
 }
 
-/* .view-high-scores, .restart-quiz {
-    width:250px;
-    margin: 15px;
-    padding: 15px;
-} */
-
-  /* overflow-wrap: break-word */
-
 hr {
     width: 600px;
 }
@@ -85,4 +77,3 @@ hr {
 .after-quiz, .high-scores-page {
     display: none;
 }
-
