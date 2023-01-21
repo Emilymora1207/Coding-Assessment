@@ -199,8 +199,7 @@ function displayHighScores() {
 restartQuizEl.addEventListener('click', function(){
     i=0;
     highScoresPage.style.display="none";
-    quizEl.style.display="initial";
-    quizEl.style.alignItems='center';  
+    quizEl.style.display="flex"; 
     j++;
     startQuiz();
     countdown=60;
@@ -211,7 +210,7 @@ restartQuizEl.addEventListener('click', function(){
 //// add a link to view the highscores at any time
 highScoresLink.addEventListener('click', function(){
     quizEl.style.display='none';
-    afterQuizEl.style.display='none'
-    highScoresPage.style.display='initial'
+    afterQuizEl.style.display='none';
+    highScoresPage.style.display='flex';
     clearInterval(timer);
 })

@@ -29,20 +29,20 @@ a {
 
 .quiz, .after-quiz {
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 20px;
+    padding: 20px;  
     background-color: var(--background);
     border-radius: 5px;
     flex-direction: column;
     width:700px;
-    /* this is making the answers centered at the start */
     align-items: center;
 }
 
-h1 {
+h1{
     font-size: 250%;
     font-weight: 300;
+}
+h2, span {
+    font-size: 150%;
 }
 
 button {
@@ -56,24 +56,17 @@ button {
     box-shadow: 2px 2px 5px var(--shadow);
 }
 
+.inline {
+    display: inline;
+}
+
 li {
     list-style: none;
     background-color: var(--background);
     border-radius: 5px;
+    margin: 15px 0;
     padding: 5px;
-    margin: 10px 0;
-    text-align: justify;
 }
-
-hr {
-    width: 600px;
-}
-
-.high-scores-page {
-    display: flex;
-    justify-content: center;
-}
-
 
 .after-quiz, .high-scores-page {
     display: none;
